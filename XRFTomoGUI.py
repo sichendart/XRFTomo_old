@@ -27,11 +27,11 @@ class Window(QMainWindow):
         self.setWindowTitle('XRF Tomo')
         #self.setWindowIcon(QtGui.QIcon(''))
         
-        self.creatMenus()
+        self.createMenus()
         self.home()
         
 #main menu    
-    def creatMenus(self):
+    def createMenus(self):
         
         self.fileMenu = self.menuBar().addMenu("&File")
         #self.fileMenu.addAction(self.newAct)
