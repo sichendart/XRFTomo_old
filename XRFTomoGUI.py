@@ -33,13 +33,22 @@ class Window(QMainWindow):
 #main menu    
     def createMenus(self):
         
+        extractAction = QAction('&Exit', self)
+        extractAction.setShortcut('Ctrl+Q')
+        extractAction.setStatusTip('Leave the APP')
+        extractAction.triggered.connect(self.close_application)
+        
+        self.statusBar()
+        
         self.fileMenu = self.menuBar().addMenu("&File")
         #self.fileMenu.addAction(self.newAct)
         #self.fileMenu.addAction(self.openAct)
         #self.fileMenu.addAction(self.saveAct)
         #self.fileMenu.addAction(self.printAct)
         #self.fileMenu.addSeparator()
-        #self.fileMenu.addAction(self.exitAct)
+        self.fileMenu.addAction(extractAction)
+        
+        self.configMenu = self.menuBar().addMenu("&Config")
 
         self.editMenu = self.menuBar().addMenu("&Edit")
         #self.editMenu.addAction(self.undoAct)
@@ -50,14 +59,13 @@ class Window(QMainWindow):
         #self.editMenu.addAction(self.pasteAct)
         #self.editMenu.addSeparator()
         
-        #extractAction = QAction('&Exit', self)
-        #extractAction.setShortcut('Ctrl+Q')
-        #extractAction.setStatusTip('Leave the APP')
-        #extractAction.triggered.connect(self.close_application)
+        self.AlignMenu = self.menuBar().addMenu("&Alignment")
         
-        #self.statusBar()
+        self.ExtraMenu = self.menuBar().addMenu("&Extra")
+         
+        self.ReconMenu = self.menuBar().addMenu("&Reconstruction")
         
-    
+        
 # add buttons    
     def home(self):
         btn = QPushButton('Quit', self)
