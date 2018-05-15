@@ -38,15 +38,19 @@ class Window(QMainWindow):
         extractAction.setStatusTip('Leave the APP')
         extractAction.triggered.connect(self.close_application)
         
+        openAction = QAction('&Import', self)
+        openAction.setStatusTip('Import files')
+        
         self.statusBar()
         
         self.fileMenu = self.menuBar().addMenu("&File")
-        #self.fileMenu.addAction(self.newAct)
         #self.fileMenu.addAction(self.openAct)
         #self.fileMenu.addAction(self.saveAct)
         #self.fileMenu.addAction(self.printAct)
         #self.fileMenu.addSeparator()
+        self.fileMenu.addAction(openAction)
         self.fileMenu.addAction(extractAction)
+
         
         self.configMenu = self.menuBar().addMenu("&Config")
 
