@@ -1,8 +1,9 @@
 import sys
 from PyQt4 import QtGui, QtCore
 
-Class Window(QtGui.QMainWindow)
-  def __init__(self)
+class Window(QtGui.QMainWindow):
+    
+  def __init__(self):
       super(Window, self).__init__()
       self.setGeometry(50,50, 300)
       self.setWindowTitle("XRF Tomo")
