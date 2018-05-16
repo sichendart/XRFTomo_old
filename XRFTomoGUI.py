@@ -16,7 +16,8 @@ except:
     from PyQt5.QtGui import *
     from PyQt5.QtCore import *
     from PyQt5.QtWidgets import *
-    
+
+from moreOpts import * 
 
   
 class Window(QMainWindow):
@@ -26,6 +27,8 @@ class Window(QMainWindow):
         self.setGeometry(50, 50, 500, 300)
         self.setWindowTitle('XRF Tomo')
         #self.setWindowIcon(QtGui.QIcon(''))
+        #self.frame = QFrame()
+        #self.vl = QVBoxLayout()
         
         self.createMenus()
         self.home()
@@ -33,35 +36,36 @@ class Window(QMainWindow):
 #main menu    
     def createMenus(self):
         
+        opentiffAction = QAction('&Import tiff', self)
+        opentiffAction.setStatusTip('Import tiff files')
+        opentiffAction.triggered.connect(self.readDir)
+        
+        openhdfAction = QAction('&Import hdf', self)
+        openhdfAction.setStatusTip('Import hdf files')
+        openhdfAction.triggered.connect(self.readDir)
+        
+        saveAction = QAction('&Save', self)
+        saveAction.setStatusTip('Save files')
+        
         extractAction = QAction('&Exit', self)
         extractAction.setShortcut('Ctrl+Q')
         extractAction.setStatusTip('Leave the APP')
-        extractAction.triggered.connect(self.close_application)
-        
-        openAction = QAction('&Import', self)
-        openAction.setStatusTip('Import files')
+        extractAction.triggered.connect(close_application)
         
         self.statusBar()
         
         self.fileMenu = self.menuBar().addMenu("&File")
-        #self.fileMenu.addAction(self.openAct)
-        #self.fileMenu.addAction(self.saveAct)
-        #self.fileMenu.addAction(self.printAct)
-        #self.fileMenu.addSeparator()
-        self.fileMenu.addAction(openAction)
+        self.fileMenu.addAction(opentiffAction)
+        self.fileMenu.addAction(openhdfAction)
+        self.fileMenu.addSeparator()
+        self.fileMenu.addAction(saveAction)
+        self.fileMenu.addSeparator()
         self.fileMenu.addAction(extractAction)
 
         
         self.configMenu = self.menuBar().addMenu("&Config")
 
         self.editMenu = self.menuBar().addMenu("&Edit")
-        #self.editMenu.addAction(self.undoAct)
-        #self.editMenu.addAction(self.redoAct)
-        #self.editMenu.addSeparator()
-        #self.editMenu.addAction(self.cutAct)
-        #self.editMenu.addAction(self.copyAct)
-        #self.editMenu.addAction(self.pasteAct)
-        #self.editMenu.addSeparator()
         
         self.AlignMenu = self.menuBar().addMenu("&Alignment")
         
@@ -73,17 +77,26 @@ class Window(QMainWindow):
 # add buttons    
     def home(self):
         btn = QPushButton('Quit', self)
-        btn.clicked.connect(self.close_application)
+        btn.clicked.connect(close_application)
         btn.resize(btn.sizeHint())
         #btn.resize(btn.minimumSizeHint())
         btn.move(100,100)
         self.show()
         
-# add methods
-    def close_application(self):
-        print ('See you next time!')
-        sys.exit()
-        
+
+
+# readTiffStack
+    def readDir(self):
+        """
+        To select the directory of the data
+        """ 
+        fileDir = QFileDialog.getExistingDirectory(
+            self, 
+            "Open a folder", 
+            QDir.currentPath(),
+            QFileDialog.ShowDirsOnly
+            )
+        print (fileDir)      
        
 
 if __name__ == '__main__':
