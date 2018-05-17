@@ -10,7 +10,7 @@ import sys
 # define close
 def close_application(self):
     choice = QMessageBox.question(self, 'Exit!', 
-                                  'Extract?',
+                                  'Exiting the progrem?',
                                   QMessageBox.Yes | QMessageBox.No)
     if choice == QMessageBox.Yes:
         print('Exiting now!')
