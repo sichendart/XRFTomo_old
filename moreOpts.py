@@ -9,4 +9,12 @@ import sys
 
 # define close
 def close_application(self):
-    sys.exit()
+    choice = QMessageBox.question(self, 'Exit!', 
+                                  'Extract?',
+                                  QMessageBox.Yes | QMessageBox.No)
+    if choice == QMessageBox.Yes:
+        print('Exiting now!')
+        sys.exit()
+    else:
+        pass
+    
